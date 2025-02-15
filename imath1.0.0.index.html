@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i Math - Calculadora Matemática</title>
+    <style id="theme-style">
+        /* Tema Claro */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #003366; /* Azul Marinho */
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .btn {
+            background-color: #003366; /* Azul Marinho */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #002244; /* Azul mais escuro */
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .history li {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #003366;
+            text-decoration: none;
+        }
+
+        /* Tema Escuro */
+        .dark-mode body {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        .dark-mode .container {
+            background-color: #1e1e1e;
+            color: #fff;
+        }
+
+        .dark-mode h1 {
+            color: #fff;
+        }
+
+        .dark-mode input[type="text"] {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .dark-mode .btn {
+            background-color: #003366;
+            color: #fff;
+        }
+
+        .dark-mode footer {
+            color: #fff; /* Mudando para branco no modo escuro */
+        }
+
+        .dark-mode footer a {
+            color: #66ccff;
+        }
+
+        /* Rodapé com cor branca no modo escuro e preto no modo claro */
+        footer p {
+            color: #333; /* Cor preta no modo claro */
+        }
+        
+        .dark-mode footer p {
+            color: #fff; /* Cor branca no modo escuro */
+        }
+
+        /* Mudando cor do texto 'Desenvolvido' e 'CEO Mickael Souza' para preto */
+        footer p strong {
+            color: #000; /* Cor preta */
+        }
+
+        .dark-mode footer p strong {
+            color: #000; /* Cor preta no modo escuro também */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>i Math - Calculadora Matemática</h1>
+        <button id="toggle-theme" class="btn">Modo Escuro</button>
+        <div>
+            <input type="text" id="input" placeholder="Digite o cálculo" />
+            <button class="btn" onclick="calculate()">Calcular</button>
+        </div>
+        <div class="history">
+            <h3>Histórico de Cálculos</h3>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>Desenvolvido por <strong>Innovare</strong></p>
+        <p>CEO Mickael Souza</p>
+    </footer>
+
+    <script>
+        // Alternar tema
+        const toggleThemeButton = document.getElementById('toggle-theme');
+        let isDarkMode = false;
+
+        toggleThemeButton.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            toggleThemeButton.textContent = isDarkMode ? 'Modo Claro' : 'Modo Escuro';
+        });
+
+        // Função para calcular
+        function calculate() {
+            const input = document.getElementById('input');
+            const result = eval(input.value);
+            addToHistory(input.value, result);
+            input.value = '';
+        }
+
+        // Função para adicionar ao histórico
+        function addToHistory(calculation, result) {
+            const historyList = document.getElementById('history-list');
+            const newItem = document.createElement('li');
+            newItem.textContent = `${calculation} = ${result}`;
+            historyList.appendChild(newItem);
+        }
+    </script>
+</body>
+</html>
